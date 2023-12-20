@@ -1,0 +1,15 @@
+@if (posts.length>0) {
+<main>
+  @for (item of posts; track $index) {
+  {{ item?.title || notFound }}
+  <div>
+    <h2>Title:{{ item.title }}</h2>
+    <p>{{ item.description }}</p>
+  </div>
+  }
+</main>
+}
+
+<ng-template #notFound>
+  <div class="not-found">Nothing was found...</div>
+</ng-template>

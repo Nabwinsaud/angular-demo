@@ -1,0 +1,90 @@
+<form
+  style="
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+    gap: 10px;
+  "
+  [formGroup]="todoForm"
+  (ngSubmit)="onSubmit()"
+>
+  <mat-form-field appearance="outline">
+    <mat-label id="firstName">firstName :</mat-label>
+    <input matInput formControlName="firstName" placeholder="Enter FirstName" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label id="lastName">lastName :</mat-label>
+    <input matInput formControlName="lastName" placeholder="Enter LastName" />
+  </mat-form-field>
+
+  <div
+    formGroupName="address"
+    style="display: flex; flex-direction: column; gap: 10px"
+  >
+    <h2>Address</h2>
+
+    <mat-form-field appearance="outline">
+      <mat-label id="street">Street :</mat-label>
+      <input matInput formControlName="street" placeholder="Enter street" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label id="state">State :</mat-label>
+      <input
+        matInput
+        formControlName="state"
+        placeholder="Enter State Placeholder"
+      />
+    </mat-form-field>
+
+    <!-- 
+      
+    <label for="state">State: </label>
+    <input id="state" type="text" formControlName="state" /> -->
+
+    <mat-form-field appearance="outline">
+      <mat-label id="city">City Code :</mat-label>
+      <input matInput formControlName="city" placeholder="Enter City" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label id="zip">Zip Code :</mat-label>
+      <input matInput formControlName="zip" placeholder="Placeholder" />
+      <!-- <mat-hint>Hint</mat-hint> -->
+    </mat-form-field>
+  </div>
+
+  <div formArrayName="socialLinks">
+    <h4>Social Media Links</h4>
+    <button mat-raised-button type="button" (click)="(addSocialLinks)">
+      Add Links
+    </button>
+    @for (item of socialLinks.controls; track socialLinks.controls; let idx =
+    $index) {
+    <mat-form-field appearance="outline">
+      <mat-label id="item-{{ idx }}">Links :</mat-label>
+      <input matInput formControlName="idx" placeholder="Social Media Links" />
+    </mat-form-field>
+
+    }
+  </div>
+
+  <button
+    type="submit"
+    [disabled]="!todoForm.valid"
+    mat-raised-button
+    color="primary"
+  >
+    Submit
+  </button>
+
+  <div>
+    <p>Submitted value is : {{ todoForm.value | json }}</p>
+  </div>
+  <p>form status : {{ todoForm.status }}</p>
+</form>
+
+<!-- <label for="city">City: </label>
+<input id="city" type="text" formControlName="city" /> -->
